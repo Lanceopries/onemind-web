@@ -1,0 +1,48 @@
+<mat-drawer-container class="example-container" [hasBackdrop]="true">
+  <mat-drawer #drawer [(opened)]="opened" [mode]="'over'">
+    <mat-nav-list>
+      <h1 class="menu-info">To be Train</h1>
+      <!-- <p class="menu-info">Привет, Админ!</p> -->
+
+      <mat-divider></mat-divider>
+      <div mat-subheader>Основное</div>
+
+      <mat-list-item [routerLink]="['/admin']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}" (click)="drawer.toggle()">
+        <mat-icon mat-list-icon>dashboard</mat-icon> Фразы
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+      <div mat-subheader>Инструменты</div>
+
+      <mat-list-item [routerLink]="['/admin/tools/generator']" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}" (click)="drawer.toggle()">
+        <mat-icon mat-list-icon>memory</mat-icon> Генератор
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-toolbar color="primary">
+    <button mat-icon-button class="example-icon" aria-label="Menu" (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>To be Train</span>
+    <span class="example-spacer"></span>
+
+    <button mat-icon-button class="example-icon" [matMenuTriggerFor]="menu">
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">Выйти</button>
+    </mat-menu>
+  </mat-toolbar>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+</mat-drawer-container>

@@ -1,0 +1,42 @@
+header {
+  display: flex;
+  margin-left: 96px;
+  margin-top: 32px;
+}
+
+.mat-form-field {
+  display: block;
+}
+
+.auth-form {
+  max-width: 450px;
+  margin: auto;
+  margin-top: 250px;
+}
+
+.example-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.example-right-align {
+  text-align: right;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.example-right-align {
+  -moz-appearance: textfield;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.mat-list-icon {
+  color: rgba(0, 0, 0, 0.54);
+}
