@@ -27,6 +27,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class InfoModalComponent implements OnInit {
 
+  // TODO: принять отображаемые данные
+  // TODO: принять тип отображаемых данных - Надежность и тд
   public data: any[] = []
 
   constructor() {}

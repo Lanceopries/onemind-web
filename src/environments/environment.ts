@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'http://localhost:5000/api'
-  apiUrl: 'https://onemind-api.herokuapp.com/api'
+ // apiUrl: 'http://localhost:5000/api'
+   apiUrl: 'https://onemind-api.herokuapp.com/api'
 };
 
 /*

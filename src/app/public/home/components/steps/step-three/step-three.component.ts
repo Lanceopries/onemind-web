@@ -35,14 +35,18 @@ import { InfoModalComponent } from '../../../modals/info-modal/info-modal.compon
                 <div class="content">
                   <div class="stats xl">100</div>
                   <div class="description">Уровень надежности Организации</div>
-                  <button class="action redirect" (click)="openModal()" >Подробнее</button>
+                  <div class="action redirect" (click)="openModal()">
+                    Подробнее
+                  </div>
                 </div>
               </div>
               <div class="card">
                 <div class="content">
                   <div class="stats md">600 000 руб</div>
                   <div class="description">Уровень надежности Организации</div>
-                  <button class="action redirect" (click)="openModal()" >Подробнее</button>
+                  <div class="action redirect" (click)="openModal()">
+                    Подробнее
+                  </div>
                 </div>
               </div>
               <div class="card">
@@ -51,7 +55,9 @@ import { InfoModalComponent } from '../../../modals/info-modal/info-modal.compon
                   <div class="description">
                     Преобретено имещества на данную сумму
                   </div>
-                  <button class="action redirect" (click)="openModal()" >Подробнее</button>
+                  <div class="action redirect" (click)="openModal()">
+                    Подробнее
+                  </div>
                 </div>
               </div>
               <div class="card">
@@ -59,7 +65,7 @@ import { InfoModalComponent } from '../../../modals/info-modal/info-modal.compon
                   <div class="stats xl">67</div>
                   <div class="info">Выше среднего!</div>
                   <div class="description">Сделок проведено</div>
-                  <button class="action redirect" (click)="openModal()" >Подробнее</button>
+                  <div class="action" (click)="openModal()">Подробнее</div>
                 </div>
               </div>
             </div>
@@ -101,7 +107,7 @@ import { InfoModalComponent } from '../../../modals/info-modal/info-modal.compon
                     По вашему запросу также были найдены и другие организации
                   </p>
                 </div>
-                <div class="action">Смотреть</div>
+                <div class="action" (click)="getData()">Смотреть</div>
               </div>
               <div class="organization">
                 <div class="info">
@@ -111,7 +117,7 @@ import { InfoModalComponent } from '../../../modals/info-modal/info-modal.compon
                     По вашему запросу также были найдены и другие организации
                   </p>
                 </div>
-                <div class="action">Смотреть</div>
+                <div class="action" (click)="getData()" >Смотреть</div>
               </div>
             </div>
           </div>
@@ -146,7 +152,7 @@ export class StepThreeComponent implements OnInit {
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {
-    this._getData();
+    this.getData();
   }
 
   public openStepOne() {
@@ -158,7 +164,7 @@ export class StepThreeComponent implements OnInit {
     this.modal.open(data);
   }
 
-  private _getData() {
+  public getData() {
     this.loading = true;
 
     if (this.data.type === 'byINN') {

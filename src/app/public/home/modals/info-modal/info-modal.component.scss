@@ -1,6 +1,4 @@
 .modal-content {
-  width: 100%;
-
   h4 {
     font-style: normal;
     font-weight: bold;
@@ -15,11 +13,14 @@
       .list {
         background: #F8F9FC;
         border-radius: 4px;
+        padding: 8px;
 
         .item {
           background: #FFFFFF;
           border-radius: 4px;
           padding: 16px;
+
+          margin-top: 8px;
 
           display: flex;
           justify-content: space-between;
