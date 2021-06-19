@@ -4,15 +4,27 @@ import { AngularMaterialModule } from '../../shared/modules/material.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './containers/home/home.component';
+import { SearchComponent } from './containers/search/search.component';
 import { StepOneComponent } from './components/steps/step-one/step-one.component';
 import { StepTwoComponent } from './components/steps/step-two/step-two.component';
+import { HomeComponent } from './containers/home/home.component';
+import { PublicLayoutComponent } from './containers/public-layout/public-layout.component';
 
 const routes = [
   {
     path: '',
-    component: HomeComponent,
-  },
+    component: PublicLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: HomeComponent,
+      },
+      {
+        path: 'search',
+        component: SearchComponent,
+      },
+    ]
+  }
 ];
 
 @NgModule({
@@ -23,7 +35,9 @@ const routes = [
     AngularMaterialModule,
   ],
   declarations: [
+    PublicLayoutComponent,
     HomeComponent,
+    SearchComponent,
     StepOneComponent,
     StepTwoComponent,
     StepThreeComponent,

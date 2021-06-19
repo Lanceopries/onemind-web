@@ -19,12 +19,30 @@ table {
 
 button {
   padding: 14px 24px;
-  border-radius: 4px;
+  border-radius: 6px;
   border: unset;
+
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  padding: 14px 24px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 125%;
 
   &.primary {
     background-color: #3176FF;
     color: white;
+
+    &_green {
+      background-color: #2BE51A;
+      color: white;
+    }
   }
 
   &.default {
@@ -41,11 +59,32 @@ button {
 }
 
 input {
-  padding: 14px 24px;
-  border-radius: 4px;
   border: unset;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 12px 16px;
+
+  background: #F8F9FC;
+  border-radius: 6px;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 150%;
+
+  color: #5C6370;
+}
+
+input:active {
   color: #3D3F43;
-  background-color: transparent;
-  border: 1px solid #D6D7DA;
-  box-sizing: border-box;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+input:disabled {
+  color: #D6D7DA;
 }
