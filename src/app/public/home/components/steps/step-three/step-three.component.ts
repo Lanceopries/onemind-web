@@ -1,11 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { OrganizationInfoInterface } from 'src/app/shared/interfaces/organization-info.interface';
 import { SearchService } from 'src/app/shared/services/search.service';
+import { InfoModalComponent } from '../../../modals/info-modal/info-modal.component';
 
 @Component({
   selector: 'step-three',
   styleUrls: ['./step-three.component.scss'],
   template: `
+    <info-modal #modal></info-modal>
     <div class="step-three">
       <div class="step-three_loading" *ngIf="loading; else contentTemplate">
         <p>Пожалуйста, подождите. Отчет формируется...</p>
@@ -26,14 +35,14 @@ import { SearchService } from 'src/app/shared/services/search.service';
                 <div class="content">
                   <div class="stats xl">100</div>
                   <div class="description">Уровень надежности Организации</div>
-                  <div class="action">Подробнее</div>
+                  <button class="action redirect" (click)="openModal()" >Подробнее</button>
                 </div>
               </div>
               <div class="card">
                 <div class="content">
                   <div class="stats md">600 000 руб</div>
                   <div class="description">Уровень надежности Организации</div>
-                  <div class="action">Подробнее</div>
+                  <button class="action redirect" (click)="openModal()" >Подробнее</button>
                 </div>
               </div>
               <div class="card">
@@ -42,7 +51,7 @@ import { SearchService } from 'src/app/shared/services/search.service';
                   <div class="description">
                     Преобретено имещества на данную сумму
                   </div>
-                  <div class="action">Подробнее</div>
+                  <button class="action redirect" (click)="openModal()" >Подробнее</button>
                 </div>
               </div>
               <div class="card">
@@ -50,7 +59,7 @@ import { SearchService } from 'src/app/shared/services/search.service';
                   <div class="stats xl">67</div>
                   <div class="info">Выше среднего!</div>
                   <div class="description">Сделок проведено</div>
-                  <div class="action">Подробнее</div>
+                  <button class="action redirect" (click)="openModal()" >Подробнее</button>
                 </div>
               </div>
             </div>
@@ -127,6 +136,8 @@ export class StepThreeComponent implements OnInit {
   @Output()
   openNextStep = new EventEmitter<string>();
 
+  @ViewChild('modal', { static: false }) modal: InfoModalComponent;
+
   public organizationInfo: OrganizationInfoInterface;
 
   public loading: boolean = false;
@@ -140,6 +151,11 @@ export class StepThreeComponent implements OnInit {
 
   public openStepOne() {
     this.openNextStep.emit();
+  }
+
+  openModal() {
+    let data: any[] = [];
+    this.modal.open(data);
   }
 
   private _getData() {

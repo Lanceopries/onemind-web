@@ -1,9 +1,20 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { SearchModalComponent } from '../../../modals/search-modal/search-modal.component';
 
 @Component({
   selector: 'step-one',
   styleUrls: ['./step-one.component.scss'],
   template: `
+    <search-modal
+      #modal
+      (openNextStep)="openStepThree($event)"
+      ></search-modal>
     <div class="step-one">
       <div class="step-one_header">
         <h2>Получите информацию об организациях</h2>
@@ -11,19 +22,21 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
       <div class="step-one_actions">
         <div class="card">
           <div class="icon">
-            <img src="../../../../../../assets/images/icon_inn.png" alt="" />
+            <img src="../../../../../../assets/images/icon_inn.png" alt="ИНН" />
           </div>
           <div class="title">
-            <h3>По ИНН или <br> ОГРН</h3>
+            <h3>
+              По ИНН или <br />
+              ОГРН
+            </h3>
           </div>
-          <button type="button" class="primary" (click)="openStepTwo('byINN')">
+          <button type="button" class="primary" (click)="openModal('byINN')">
             Продолжить так
           </button>
         </div>
-
         <div class="card">
           <div class="icon">
-            <img src="../../../../../../assets/images/icon_name.png" alt="" />
+            <img src="../../../../../../assets/images/icon_name.png" alt="ФИО" />
           </div>
           <div class="title">
             <h3>По ФИО или Фотографии</h3>
@@ -31,7 +44,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
           <button
             type="button"
             class="primary_green"
-            (click)="openStepTwo('byPerson')"
+            (click)="openModal('byPerson')"
           >
             Продолжить так
           </button>
@@ -43,13 +56,21 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class StepOneComponent implements OnInit {
   @Output()
-  openNextStep = new EventEmitter<string>();
+  openNextStep = new EventEmitter<any>();
+
+  @ViewChild('modal', { static: false }) modal: SearchModalComponent;
+
+  public selectedType: string = 'byINN';
+
+  openModal(type: string) {
+    this.modal.open(type);
+  }
 
   constructor() {}
 
   ngOnInit() {}
 
-  public openStepTwo(type: string) {
-    this.openNextStep.emit(type);
+  public openStepThree(data) {
+    this.openNextStep.emit(data);
   }
 }

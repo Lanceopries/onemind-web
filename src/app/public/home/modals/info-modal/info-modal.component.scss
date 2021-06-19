@@ -1,0 +1,48 @@
+.modal-content {
+  width: 100%;
+
+  h4 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 125%;
+    color: #242628;
+    margin-bottom: 24px;
+  }
+
+  .inner {
+    .form {
+      .list {
+        background: #F8F9FC;
+        border-radius: 4px;
+
+        .item {
+          background: #FFFFFF;
+          border-radius: 4px;
+          padding: 16px;
+
+          display: flex;
+          justify-content: space-between;
+
+          .title {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 13px;
+            line-height: 150%;
+            color: #5C6370;
+          }
+
+          .value {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 13px;
+            line-height: 150%;
+            color: #242628;
+          }
+        }
+
+        // background: linear-gradient(180deg, rgba(248, 249, 252, 0) 0%, #F8F9FC 100%);
+      }
+    }
+  }
+}

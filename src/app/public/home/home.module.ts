@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchComponent } from './containers/search/search.component';
 import { StepOneComponent } from './components/steps/step-one/step-one.component';
-import { StepTwoComponent } from './components/steps/step-two/step-two.component';
 import { HomeComponent } from './containers/home/home.component';
 import { PublicLayoutComponent } from './containers/public-layout/public-layout.component';
+import { InfoModalComponent } from './modals/info-modal/info-modal.component';
+import { SearchModalComponent } from './modals/search-modal/search-modal.component';
 
 const routes = [
   {
@@ -23,8 +24,8 @@ const routes = [
         path: 'search',
         component: SearchComponent,
       },
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
@@ -35,12 +36,17 @@ const routes = [
     AngularMaterialModule,
   ],
   declarations: [
+    // Layout
     PublicLayoutComponent,
+    // Containers
     HomeComponent,
     SearchComponent,
+    // Components
     StepOneComponent,
-    StepTwoComponent,
     StepThreeComponent,
+    // Modals
+    InfoModalComponent,
+    SearchModalComponent,
   ],
   providers: [],
 })
