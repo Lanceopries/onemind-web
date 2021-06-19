@@ -10,6 +10,7 @@ import { HomeComponent } from './containers/home/home.component';
 import { PublicLayoutComponent } from './containers/public-layout/public-layout.component';
 import { InfoModalComponent } from './modals/info-modal/info-modal.component';
 import { SearchModalComponent } from './modals/search-modal/search-modal.component';
+import { WipModalComponent } from './modals/wip-modal/wip-modal.component';
 
 const routes = [
   {
@@ -47,6 +48,7 @@ const routes = [
     // Modals
     InfoModalComponent,
     SearchModalComponent,
+    WipModalComponent
   ],
   providers: [],
 })

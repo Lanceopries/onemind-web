@@ -6,15 +6,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { SearchModalComponent } from '../../../modals/search-modal/search-modal.component';
+import { WipModalComponent } from '../../../modals/wip-modal/wip-modal.component';
 
 @Component({
   selector: 'step-one',
   styleUrls: ['./step-one.component.scss'],
   template: `
-    <search-modal
-      #modal
-      (openNextStep)="openStepThree($event)"
-      ></search-modal>
+    <search-modal #modal (openNextStep)="openStepThree($event)"></search-modal>
+    <wip-modal #modalWIP></wip-modal>
     <div class="step-one">
       <div class="step-one_header">
         <h2>Получите информацию об организациях</h2>
@@ -36,7 +35,10 @@ import { SearchModalComponent } from '../../../modals/search-modal/search-modal.
         </div>
         <div class="card">
           <div class="icon">
-            <img src="../../../../../../assets/images/icon_name.png" alt="ФИО" />
+            <img
+              src="../../../../../../assets/images/icon_name.png"
+              alt="ФИО"
+            />
           </div>
           <div class="title">
             <h3>По ФИО или Фотографии</h3>
@@ -44,7 +46,7 @@ import { SearchModalComponent } from '../../../modals/search-modal/search-modal.
           <button
             type="button"
             class="primary_green"
-            (click)="openModal('byPerson')"
+            (click)="openWIP()"
           >
             Продолжить так
           </button>
@@ -59,8 +61,13 @@ export class StepOneComponent implements OnInit {
   openNextStep = new EventEmitter<any>();
 
   @ViewChild('modal', { static: false }) modal: SearchModalComponent;
+  @ViewChild('modalWIP', { static: false }) modalWIP: WipModalComponent;
 
   public selectedType: string = 'byINN';
+
+  openWIP() {
+    this.modalWIP.open();
+  }
 
   openModal(type: string) {
     this.modal.open(type);

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { MoreInfoInterface } from 'src/app/shared/interfaces/report.interface';
 
 @Component({
   selector: 'info-modal',
@@ -6,14 +7,13 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   template: `
     <div #infoModal class="modal-container">
       <div class="modal-content">
-        <h4>Уровень надежности</h4>
+        <h4>{{ getCurrentType() }}</h4>
         <div class="inner">
           <div class="form">
-            <!-- ng switch - type, ngFor -->
             <div class="list">
-              <div class="item">
-                <div class="title">Судимости:</div>
-                <div class="value">10:</div>
+              <div class="item" *ngFor="let item of data">
+                <div class="title">{{item.key}}:</div>
+                <div class="value">{{item.value}}</div>
               </div>
             </div>
           </div>
@@ -26,10 +26,10 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
   `,
 })
 export class InfoModalComponent implements OnInit {
-
   // TODO: принять отображаемые данные
   // TODO: принять тип отображаемых данных - Надежность и тд
-  public data: any[] = []
+  public currentType: string = 'reliability';
+  public data: MoreInfoInterface[] = [];
 
   constructor() {}
 
@@ -37,7 +37,29 @@ export class InfoModalComponent implements OnInit {
 
   @ViewChild('infoModal', { static: false }) modal: ElementRef;
 
-  open(data: any[]) {
+  getCurrentType() {
+    let result = 'Уровень надежности';
+    switch (this.currentType) {
+      case 'reliability':
+        result = 'Уровень надежности';
+        break;
+      case 'freelimit':
+        result = 'Свободный лимит';
+        break;
+      case 'companyPrice':
+        result = 'Стоимость компании';
+        break;
+      case 'verdict':
+        result = 'Решение системы';
+        break;
+      default:
+        result = 'Уровень надежности';
+        break;
+    }
+    return result;
+  }
+
+  open(data: MoreInfoInterface[]) {
     this.data = data;
     this.modal.nativeElement.style.display = 'block';
   }

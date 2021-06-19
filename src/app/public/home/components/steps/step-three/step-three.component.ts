@@ -6,15 +6,17 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { OrganizationInfoInterface } from 'src/app/shared/interfaces/organization-info.interface';
+import { ReportInterface } from 'src/app/shared/interfaces/report.interface';
 import { SearchService } from 'src/app/shared/services/search.service';
 import { InfoModalComponent } from '../../../modals/info-modal/info-modal.component';
+import { WipModalComponent } from '../../../modals/wip-modal/wip-modal.component';
 
 @Component({
   selector: 'step-three',
   styleUrls: ['./step-three.component.scss'],
   template: `
     <info-modal #modal></info-modal>
+    <wip-modal #modalWIP></wip-modal>
     <div class="step-three">
       <div class="step-three_loading" *ngIf="loading; else contentTemplate">
         <p>Пожалуйста, подождите. Отчет формируется...</p>
@@ -23,49 +25,64 @@ import { InfoModalComponent } from '../../../modals/info-modal/info-modal.compon
         <ng-container *ngIf="!error; else errorTemplate">
           <div class="step-three_content">
             <div class="title">
-              <h2>{{ organizationInfo?.name }}</h2>
+              <h2>{{ report?.organization?.name ? report?.organization?.name : 'Название компании' }}</h2>
             </div>
-            <div class="inn">ИНН - {{ organizationInfo?.inn }}</div>
-            <div class="ogrn">ОГРН {{ organizationInfo?.inn }}</div>
+            <div class="inn">ИНН - {{ report?.organization?.inn ? report?.organization?.inn : '229100804842' }}</div>
+            <div class="ogrn">ОГРН {{ report?.organization?.ogrn ? report?.organization?.ogrn : '320619600009205 ' }}</div>
 
-            <div class="work-from">Работает с 2012 года</div>
+            <div class="work-from">
+              Работает с {{ report?.organization?.workFrom ? report?.organization?.workFrom : '22.01.2005' }}
+            </div>
 
             <div class="cards">
               <div class="card">
                 <div class="content">
-                  <div class="stats xl">100</div>
+                  <div class="stats xl">{{ report?.reliability?.result ? report?.reliability?.result : 100  }}</div>
                   <div class="description">Уровень надежности Организации</div>
-                  <div class="action redirect" (click)="openModal()">
+                  <div
+                    class="action redirect"
+                    (click)="openModal(report?.reliability?.moreInfo)"
+                  >
                     Подробнее
                   </div>
                 </div>
               </div>
               <div class="card">
                 <div class="content">
-                  <div class="stats md">600 000 руб</div>
-                  <div class="description">Уровень надежности Организации</div>
-                  <div class="action redirect" (click)="openModal()">
+                  <div class="stats md">{{ report?.freelimit?.result ? report?.freelimit?.result : '100 000 руб' }}</div>
+                  <div class="description">Свободный лимит Организации</div>
+                  <div
+                    class="action redirect"
+                    (click)="openModal(report?.freelimit?.moreInfo)"
+                  >
                     Подробнее
                   </div>
                 </div>
               </div>
               <div class="card">
                 <div class="content">
-                  <div class="stats sm">10 000 000 руб</div>
+                  <div class="stats sm">{{ report?.companyPrice?.result ? report?.companyPrice?.result : '1 000 000 руб' }}</div>
                   <div class="description">
-                    Преобретено имещества на данную сумму
+                    Текущая себестоимость организации
                   </div>
-                  <div class="action redirect" (click)="openModal()">
+                  <div
+                    class="action redirect"
+                    (click)="openModal(report?.companyPrice?.moreInfo)"
+                  >
                     Подробнее
                   </div>
                 </div>
               </div>
               <div class="card">
                 <div class="content">
-                  <div class="stats xl">67</div>
-                  <div class="info">Выше среднего!</div>
-                  <div class="description">Сделок проведено</div>
-                  <div class="action" (click)="openModal()">Подробнее</div>
+                  <div class="stats xl">{{ report?.verdict?.result ? report?.verdict?.result : '100' }}</div>
+                  <div class="description">Итоговое решение системы</div>
+                  <div
+                    class="action"
+                    (click)="openModal(report?.verdict?.moreInfo)"
+                  >
+                    Подробнее
+                  </div>
                 </div>
               </div>
             </div>
@@ -74,19 +91,40 @@ import { InfoModalComponent } from '../../../modals/info-modal/info-modal.compon
             </div>
 
             <div class="social-links">
-              <div class="social-link">
-                <img src="../../../../../../assets/images/icon_vk.png" alt="" />
+              <div *ngIf="!report?.organization?.socialLinks">
+                <h4>Организация не найдена в социальных сетях</h4>
               </div>
-              <div class="social-link">
-                <img
-                  src="../../../../../../assets/images/icon_instagram.png"
-                  alt=""
-                />
+              <div
+                class="social-link"
+                *ngFor="let link of report?.organization?.socialLinks"
+              >
+                <ng-container [ngSwitch]="link?.type">
+                  <a [href]="link?.url" target="blank">
+                    <img
+                      *ngSwitchCase="'vk'"
+                      src="../../../../../../assets/images/icon_vk.png"
+                      alt="VK"
+                    />
+                    <img
+                      *ngSwitchCase="'insta'"
+                      src="../../../../../../assets/images/icon_vk.png"
+                      alt="VK"
+                    />
+                    <img
+                      *ngSwitchDefault
+                      src="../../../../../../assets/images/icon_vk.png"
+                      alt="VK"
+                    />
+                  </a>
+                </ng-container>
+                <img />
               </div>
             </div>
 
             <div class="actions">
-              <button class="primary w-100">Смотреть полный отчет</button>
+              <button class="primary w-100" (click)="openWIP()">
+                Смотреть полный отчет
+              </button>
               <button class="default w-100" (click)="openStepOne()">
                 Проверить еще одну организацию
               </button>
@@ -96,28 +134,29 @@ import { InfoModalComponent } from '../../../modals/info-modal/info-modal.compon
               <h2>Список организаций</h2>
             </div>
             <div class="organization-description">
-              По вашему запросу также были найдены и другие организации
+              {{
+                report?.sameOrganizationList
+                  ? 'По вашему запросу также были найдены и другие организации'
+                  : 'По вашему запросу другие организации не были найдены'
+              }}
             </div>
 
-            <div class="organization-list">
-              <div class="organization">
+            <div class="organization-list" *ngIf="report?.sameOrganizationList">
+              <div
+                class="organization"
+                *ngFor="let item of report?.sameOrganizationList"
+              >
                 <div class="info">
-                  <h4>ООО Самое лучшее ООО</h4>
-                  <p>
-                    По вашему запросу также были найдены и другие организации
-                  </p>
+                  <h4>{{ item?.name }}</h4>
+                  <div
+                    class="status"
+                    *ngFor="let tag of item?.tags"
+                    [ngClass]="tag?.type"
+                  >
+                    {{ tag?.title }}
+                  </div>
                 </div>
-                <div class="action" (click)="getData()">Смотреть</div>
-              </div>
-              <div class="organization">
-                <div class="info">
-                  <h4>ООО Самое лучшее ООО</h4>
-                  <div class="status">Банкрот</div>
-                  <p>
-                    По вашему запросу также были найдены и другие организации
-                  </p>
-                </div>
-                <div class="action" (click)="getData()" >Смотреть</div>
+                <div class="action" (click)="getData(item?.inn)">Смотреть</div>
               </div>
             </div>
           </div>
@@ -143,8 +182,9 @@ export class StepThreeComponent implements OnInit {
   openNextStep = new EventEmitter<string>();
 
   @ViewChild('modal', { static: false }) modal: InfoModalComponent;
+  @ViewChild('modalWIP', { static: false }) modalWIP: WipModalComponent;
 
-  public organizationInfo: OrganizationInfoInterface;
+  public report: ReportInterface;
 
   public loading: boolean = false;
   public error: boolean = false;
@@ -159,12 +199,15 @@ export class StepThreeComponent implements OnInit {
     this.openNextStep.emit();
   }
 
-  openModal() {
-    let data: any[] = [];
+  openWIP() {
+    this.modalWIP.open();
+  }
+
+  openModal(data) {
     this.modal.open(data);
   }
 
-  public getData() {
+  public getData(inn?) {
     this.loading = true;
 
     if (this.data.type === 'byINN') {
@@ -174,11 +217,15 @@ export class StepThreeComponent implements OnInit {
         data: innArray,
       };
 
+      if (inn) {
+        request.data = [];
+        request.data.push(inn);
+      }
+
       this.searchService.search(request).subscribe(
         (resp) => {
-          console.log(resp);
-          this.organizationInfo = resp[0][1];
-          console.log(this.organizationInfo);
+          this.report = resp;
+
           this.error = false;
           this.loading = false;
         },
@@ -195,8 +242,7 @@ export class StepThreeComponent implements OnInit {
 
       this.searchService.search(request).subscribe(
         (resp) => {
-          console.log(resp);
-          this.organizationInfo = resp[0][1];
+          this.report = resp;
           this.error = false;
           this.loading = false;
         },
