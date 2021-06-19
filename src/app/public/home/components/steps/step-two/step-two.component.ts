@@ -29,21 +29,28 @@ import { Component, Input, OnInit } from '@angular/core';
           </form>
         </div>
         <div *ngSwitchCase="'byPerson'">
-          <h3>По ФИО</h3>
-          <form [formGroup]="form">
-            <div>
-              <label>
+          <h3>Введите ФИО или загрузите фотографию Юр. лица</h3>
+          <form [formGroup]="form" class="form">
+            <div class="array">
+              <div class="array-item">
                 <input
                   formControlName="fullname"
-                  placeholder="Введите полное ФИО физ. лица"
+                  placeholder="Введите Фамилию Имя Отчество (при наличии)"
                 />
-              </label>
+              </div>
+              <div class="array-item">
+                <div class="file-input">
+                  <img src="../../../../../../assets/images/icon_file.png" alt="" class="icon">
+                  <p class="title">Прикрепить фотографию</p>
+                </div>
+              </div>
             </div>
           </form>
         </div>
       </div>
       <div class="step-two_actions">
-        <button class="primary" (click)="openStepThree()">Продолжить</button>
+        <button class="primary" (click)="openStepThree()" [disabled]="type === 'byPerson'">Продолжить</button>
+        <small *ngIf="type === 'byPerson'">Работа в процессе...</small>
       </div>
     </div>
   `,

@@ -28,6 +28,33 @@
             input {
               width: 100%;
             }
+
+            .file-input {
+              cursor: pointer;
+
+              background: #FFFFFF;
+              width: 100%;
+
+              border: 1px solid #F8F9FC;
+              box-sizing: border-box;
+              box-shadow: 0px 4px 8px #F6F7F9;
+              border-radius: 6px;
+
+              display: flex;
+              justify-content: start;
+
+              padding: 8px;
+
+              .title {
+                font-style: normal;
+                font-weight: bold;
+                line-height: 120%;
+
+                color: #1A79FF;
+
+                margin-left: 12px;
+              }
+            }
           }
         }
       }

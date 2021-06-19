@@ -37,6 +37,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
           </button>
         </div>
       </div>
+      <div class="background search-select"></div>
     </div>
   `,
 })

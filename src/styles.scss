@@ -56,6 +56,16 @@ button {
     background-color: #ff313b;
     color: white;
   }
+
+  &.w-100 {
+    width: 100%;
+  }
+}
+
+button:disabled {
+  background: #D6D7DA;
+  color: #FFFFFF;
+  border-radius: 6px;
 }
 
 input {
@@ -87,4 +97,25 @@ input:focus-visible {
 
 input:disabled {
   color: #D6D7DA;
+}
+
+// Common
+.background {
+  background: url(./assets/images/common/background.png) center no-repeat;
+  background-size: auto 100%;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+
+  &.home {}
+
+  &.search-select {
+    top: 142px;
+  }
+
+  &.result {
+    top: 148px;
+  }
 }
