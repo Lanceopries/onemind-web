@@ -1,0 +1,80 @@
+:host {
+  width: 100%;
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .promo-info {
+      width: 500px;
+      .title {
+        h1 {
+          .accent {
+            color: #1A79FF;
+          }
+
+          color: #242628;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 48px;
+          line-height: 125%;
+        }
+
+        margin-bottom: 24px;
+      }
+
+      .description {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 150%;
+        color: #242628;
+        margin-bottom: 40px;
+      }
+
+      .action {}
+    }
+  }
+
+  // media
+  @media (min-width:320px) {
+    .container {
+      width: 320px;
+    }
+  }
+
+  @media (min-width:481px) {
+    .container {
+      width: 450px;
+    }
+  }
+
+  @media (min-width:641px) {
+    .container {
+      width: 600px;
+    }
+  }
+
+  @media (min-width:961px) {
+    .container {
+      width: 900px;
+    }
+  }
+
+  @media (min-width:1025px) {
+    .container {
+      width: 900px;
+    }
+  }
+
+  @media (min-width:1281px) {
+    .container {
+      width: 1159px;
+    }
+  }
+
+}
