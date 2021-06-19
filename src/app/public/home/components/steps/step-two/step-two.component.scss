@@ -1,0 +1,36 @@
+.step-two {
+  width: 100%;
+
+  div {
+    width: 100%;
+    div {
+      width: 100%;
+      .form {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: stretch;
+        margin-bottom: 50px;
+
+        .array {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: stretch;
+
+          .array-item {
+            display: flex;
+            justify-content: stretch;
+            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 25px;
+
+            input {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

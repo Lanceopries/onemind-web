@@ -2,22 +2,26 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'home',
+  styleUrls: ['./home.component.scss'],
   template: `
-    <div>
-      <step-one
-        *ngIf="isStepOne"
-        (openNextStep)="openStepTwo($event)"
-      ></step-one>
-      <step-two
-        *ngIf="isStepTwo"
-        [type]="typeOfCheck"
-        (openNextStep)="openStepThree($event)"
-      ></step-two>
-      <step-three
-        *ngIf="isStepThree"
-        [data]="filledData"
-        (openNextStep)="openStepOne()"
-      ></step-three>
+    <div class="home">
+      <h1>OneMind</h1>
+      <div class="content">
+        <step-one
+          *ngIf="isStepOne"
+          (openNextStep)="openStepTwo($event)"
+        ></step-one>
+        <step-two
+          *ngIf="isStepTwo"
+          [type]="typeOfCheck"
+          (openNextStep)="openStepThree($event)"
+        ></step-two>
+        <step-three
+          *ngIf="isStepThree"
+          [data]="filledData"
+          (openNextStep)="openStepOne()"
+        ></step-three>
+      </div>
     </div>
   `,
 })

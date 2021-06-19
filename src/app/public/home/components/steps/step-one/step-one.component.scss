@@ -1,0 +1,31 @@
+.step-one {
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    .button {
+      cursor: pointer;
+      width: 400px;
+      height: 400px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border-radius: 40px;
+      font-size: 3rem;
+
+      padding: 3rem;
+
+      &.inn {
+        background-color: #CDF0FF;
+      }
+
+      &.person {
+        background-color: #f9ffcd;
+      }
+    }
+  }
+}

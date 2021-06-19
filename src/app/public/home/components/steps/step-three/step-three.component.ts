@@ -2,9 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'step-three',
+  styleUrls: ['./step-three.component.scss'],
   template: `
-    <div>
-      <div>
+    <div class="step-three">
+      <div class="step-three_loading">
+        <p>Отчет формируется...</p>
+      </div>
+      <div class="step-three_content">
         <h2>
           ООО ГЕКТАР ИНН - 5120501250 ОГРН 120502501 =работает с 2012= =соц.
           сети=
@@ -24,14 +28,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class StepThreeComponent implements OnInit {
   @Input()
-  public data: string;
+  public data: any;
 
   @Output()
   openNextStep = new EventEmitter<string>();
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.data)
+  }
 
   public openStepOne() {
     this.openNextStep.emit();

@@ -2,12 +2,15 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'step-one',
+  styleUrls: ['./step-one.component.scss'],
   template: `
-    <div>
-      <div><h2>ПОЛУЧИТЕ ИНФОРМАЦИЮ ОБ ОРГАНИЗАЦИИ</h2></div>
+    <div class="step-one">
       <div>
-        <div (click)="openStepTwo('byINN')">По ИНН или ОГРН</div>
-        <div (click)="openStepTwo('byName')">По ФИО или Фотографии</div>
+        <h3>Получите полную аналитику об организациях</h3>
+      </div>
+      <div class="step-one__actions">
+        <div (click)="openStepTwo('byINN')" class="button inn">По ИНН или ОГРН</div>
+        <div (click)="openStepTwo('byPerson')" class="button person">По ФИО или Фотографии</div>
       </div>
     </div>
   `,
