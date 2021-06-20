@@ -297,11 +297,26 @@ export class StepThreeComponent implements OnInit {
           // this.error = true;
           let resp: ReportInterface = {
             companyPrice: {
-              moreInfo: [],
-              result: '1 000 000 руб',
+              moreInfo: [
+                {
+                  key: 'Капитализация',
+                  value: '1 646 099 руб',
+                },
+              ],
+              result: '920 468 руб',
             },
             freeLimit: {
-              moreInfo: [],
+              moreInfo: [
+                {
+                  key: 'Капитализация',
+                  value: '1 646 099 руб',
+                },
+                {
+                  key: 'Филиалы',
+                  value: '2',
+                },
+                { key: 'Объектов недвижимости', value: '2' },
+              ],
               result: '200 000 руб',
             },
             organization: {
@@ -313,11 +328,28 @@ export class StepThreeComponent implements OnInit {
               workFrom: '15.04.2016',
             },
             reliability: {
-              moreInfo: [],
-              result: '100',
+              moreInfo: [
+                {
+                  key: 'Исполнительных производств',
+                  value: '0',
+                },
+                {
+                  key: 'Филиалы',
+                  value: '2',
+                },
+                {
+                  key: 'Объектов недвижимости',
+                  value: '2',
+                },
+                {
+                  key: 'Риски',
+                  value: '41%',
+                },
+              ],
+              result: '60',
             },
             verdict: {
-              result: '100',
+              result: 'Хорошо',
               moreInfo: [],
             },
             sameOrganizationList: [],
