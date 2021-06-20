@@ -38,6 +38,12 @@
 
       .action {}
     }
+
+    .promo-image {
+      img {
+        width: 100%;
+      }
+    }
   }
 
   // media
@@ -49,7 +55,7 @@
 
   @media (min-width:481px) {
     .container {
-      width: 450px;
+      width: 375px;
     }
   }
 

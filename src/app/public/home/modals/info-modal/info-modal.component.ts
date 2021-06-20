@@ -7,15 +7,20 @@ import { MoreInfoInterface } from 'src/app/shared/interfaces/report.interface';
   template: `
     <div #infoModal class="modal-container">
       <div class="modal-content">
-        <h4>{{ getCurrentType() }}</h4>
+        <h4>{{ currentType }}</h4>
         <div class="inner">
           <div class="form">
-            <div class="list">
-              <div class="item" *ngFor="let item of data">
-                <div class="title">{{item.key}}:</div>
-                <div class="value">{{item.value}}</div>
-              </div>
+            <div class="list" *ngIf="data?.length === 0; else content">
+              <div>Данных нет</div>
             </div>
+            <ng-template #content>
+              <div class="list">
+                <div class="item" *ngFor="let item of data">
+                  <div class="title">{{ item?.key }}</div>
+                  <div class="value">{{ item?.value }}</div>
+                </div>
+              </div>
+            </ng-template>
           </div>
         </div>
         <div class="bottom-actions">
@@ -26,9 +31,7 @@ import { MoreInfoInterface } from 'src/app/shared/interfaces/report.interface';
   `,
 })
 export class InfoModalComponent implements OnInit {
-  // TODO: принять отображаемые данные
-  // TODO: принять тип отображаемых данных - Надежность и тд
-  public currentType: string = 'reliability';
+  public currentType: string = 'Уровень надежности';
   public data: MoreInfoInterface[] = [];
 
   constructor() {}
@@ -37,30 +40,24 @@ export class InfoModalComponent implements OnInit {
 
   @ViewChild('infoModal', { static: false }) modal: ElementRef;
 
-  getCurrentType() {
-    let result = 'Уровень надежности';
-    switch (this.currentType) {
+  open(data: MoreInfoInterface[], type: string) {
+    this.data = data;
+
+    switch (type) {
       case 'reliability':
-        result = 'Уровень надежности';
+        this.currentType = 'Уровень надежности';
         break;
       case 'freelimit':
-        result = 'Свободный лимит';
+        this.currentType = 'Свободный лимит';
         break;
       case 'companyPrice':
-        result = 'Стоимость компании';
+        this.currentType = 'Стоимость компании';
         break;
       case 'verdict':
-        result = 'Решение системы';
-        break;
-      default:
-        result = 'Уровень надежности';
+        this.currentType = 'Решение системы';
         break;
     }
-    return result;
-  }
 
-  open(data: MoreInfoInterface[]) {
-    this.data = data;
     this.modal.nativeElement.style.display = 'block';
   }
 

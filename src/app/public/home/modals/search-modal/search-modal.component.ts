@@ -4,7 +4,6 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  Input,
   Output,
   EventEmitter,
 } from '@angular/core';

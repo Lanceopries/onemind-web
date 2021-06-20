@@ -9,42 +9,36 @@ export interface ReportInterface {
     workFrom: string;
     // тип - ИП, ООО, ОАО и тд
     typePerson: number;
-    socialLinks: [{
-      // vk, insta
-      type: string,
-      url: string
-    }]
-  },
+    socialLinks: SocialLinkInterface[];
+  };
   // надежность
   reliability: {
     result: string;
-    moreInfo: MoreInfoInterface[]
-  },
+    moreInfo: MoreInfoInterface[];
+  };
   // свободный лимит, сколько можно выделить этому ЮЛ. считается также динамика роста и перспективы.
-  freelimit: {
+  freeLimit: {
     result: string;
-    moreInfo: MoreInfoInterface[]
-  },
+    moreInfo: MoreInfoInterface[];
+  };
   // текущая себестоимость ЮЛ - его компания, имущество, доходы и тд.
   companyPrice: {
     result: string;
-    moreInfo: MoreInfoInterface[]
-  },
+    moreInfo: MoreInfoInterface[];
+  };
   // итоговое решение системы - доверять или нет
   verdict: {
     result: string;
-    moreInfo: MoreInfoInterface[]
-  },
+    moreInfo: MoreInfoInterface[];
+  };
   // массив похожих организаций
-  sameOrganizationList: [{
-    inn: string,
-    name: string,
-    tags: [{
-      // warning, success, bad
-      type: string;
-      title: string
-    }]
-  }]
+  sameOrganizationList: ReportInterface[];
+}
+
+export interface SocialLinkInterface {
+  // vk, insta
+  type: string;
+  url: string;
 }
 
 export interface MoreInfoInterface {
